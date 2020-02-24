@@ -27,6 +27,7 @@ export default class EditLabel extends Vue {
   get currentTag() {
     return this.$store.state.currentTag;
   }
+
   created() {
     const id = this.$route.params.id;
     this.$store.commit('fetchTags');
@@ -38,7 +39,7 @@ export default class EditLabel extends Vue {
 
   update(name: string) {
     if (this.currentTag) {
-      this.$store.commit('updateTag', {id:this.currentTag.id,name});
+      this.$store.commit('updateTag', {id: this.currentTag.id, name});
     }
   }
 
@@ -64,16 +65,12 @@ export default class EditLabel extends Vue {
     align-items: center;
     justify-content: space-between;
 
-    > .title {
-
-    }
-
-    > .leftIcon {
+    .leftIcon {
       width: 24px;
       height: 24px;
     }
 
-    > .rightIcon {
+    .rightIcon {
       width: 24px;
       height: 24px;
     }

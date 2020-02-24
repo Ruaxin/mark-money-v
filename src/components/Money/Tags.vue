@@ -50,7 +50,7 @@ export default class Tags extends mixins(TagHelper) {
     flex-direction: column-reverse;
     background: white;
 
-    > .current {
+    .current {
       display: flex;
       flex-wrap: wrap;
 
@@ -72,7 +72,7 @@ export default class Tags extends mixins(TagHelper) {
       }
     }
 
-    > .new {
+    .new {
       padding-top: 16px;
 
       button {

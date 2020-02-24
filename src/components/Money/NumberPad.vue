@@ -26,16 +26,17 @@ import {Component, Prop} from 'vue-property-decorator';
 
 @Component
 export default class NumberPad extends Vue {
-  @Prop()readonly value!:number;
+  @Prop() readonly value!: number;
   output = this.value.toString();
-  inputContent(event:MouseEvent){
+
+  inputContent(event: MouseEvent) {
     const button = (event.target as HTMLBaseElement);
     const input = button.textContent!;
-    if(this.output.length === 16){return;}
-    if(this.output === '0'){
-      if('0123456789'.indexOf(input) >= 0){
+    if (this.output.length === 16) {return;}
+    if (this.output === '0') {
+      if ('0123456789'.indexOf(input) >= 0) {
         this.output = input;
-      }else {
+      } else {
         this.output += input;
       }
       return;
@@ -43,19 +44,22 @@ export default class NumberPad extends Vue {
     if (this.output.indexOf('.') >= 0 && input === '.') {return;}
     this.output += input;
   }
-  remove(){
-    if(this.output.length === 1){
-      this.output = '0'
-    }else{
-      this.output = this.output.slice(0,-1)
+
+  remove() {
+    if (this.output.length === 1) {
+      this.output = '0';
+    } else {
+      this.output = this.output.slice(0, -1);
     }
   }
-  clear(){
-    this.output = '0'
+
+  clear() {
+    this.output = '0';
   }
-  ok(){
-    this.$emit('update:value',this.output);
-    this.$emit('submit',this.output);
+
+  ok() {
+    this.$emit('update:value', this.output);
+    this.$emit('submit', this.output);
     this.output = '0';
   }
 }
@@ -65,7 +69,7 @@ export default class NumberPad extends Vue {
   @import "~@/assets/style/helper.scss";
 
   .numberPad {
-    > .output {
+    .output {
       @extend %innerShadow;
       @extend %clearFix;
       font-size: 36px;
@@ -74,7 +78,7 @@ export default class NumberPad extends Vue {
       text-align: right;
     }
 
-    > .buttons {
+    .buttons {
       @extend %clearFix;
 
       > button {
