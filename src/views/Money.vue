@@ -20,17 +20,17 @@ import Tags from '@/components/Money/Tags.vue';
 
 @Component({
   components: {Tags, FormItem, Types, NumberPad},
-  computed:{
-    recordList(){
-      return this.$store.state.recordList;
-    }
-  }
 })
 export default class Money extends Vue {
   record: RecordItem = {
     tags: [], notes: '', type: '-', amount: 0
   };
-  created(){
+
+  get recordList() {
+    return this.$store.state.recordList;
+  }
+
+  created() {
     this.$store.commit('fetchRecords');
   }
 
@@ -39,7 +39,7 @@ export default class Money extends Vue {
   }
 
   saveRecord() {
-    this.$store.commit('createRecord',this.record);
+    this.$store.commit('createRecord', this.record);
   }
 }
 </script>
