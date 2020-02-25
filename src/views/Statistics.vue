@@ -39,8 +39,6 @@ export default class Statistics extends Vue {
 
   get groupedList() {
     const {recordList} = this;
-
-
     const newList = clone(recordList)
       .filter(r => r.type === this.type)
       .sort((a, b) => dayjs(b.createdAt).valueOf() - dayjs(a.createdAt).valueOf());
@@ -70,7 +68,7 @@ export default class Statistics extends Vue {
   }
 
   tagString(tags: Tag[]) {
-    return tags.length === 0 ? '无' : tags.map(t=>t.name).join('，');
+    return tags.length === 0 ? '无' : tags.map(t => t.name).join('，');
   }
 
   beautify(string: string) {
@@ -92,10 +90,11 @@ export default class Statistics extends Vue {
 </script>
 
 <style scoped lang="scss">
-  .noResult{
+  .noResult {
     padding: 16px;
     text-align: center;
   }
+
   %item {
     padding: 8px 16px;
     min-height: 24px;

@@ -6,7 +6,7 @@
       <span class="rightIcon"/>
     </div>
     <div class="form-wrapper">
-      <FormItem :value="currentTag.name" @update:value="update" field-name="标签名" placeholder="请输入标签名"/>
+      <FormItem field-name="标签名" :value="currentTag.name" @update:value="update" placeholder="请输入标签名"/>
     </div>
     <div class="button-wrapper">
       <Button @click="remove">删除标签</Button>
@@ -28,6 +28,10 @@ export default class EditLabel extends Vue {
     return this.$store.state.currentTag;
   }
 
+  get tagList() {
+    return this.$store.state.tagList;
+  }
+
   created() {
     const id = this.$route.params.id;
     this.$store.commit('fetchTags');
@@ -37,11 +41,19 @@ export default class EditLabel extends Vue {
     }
   }
 
-  update(name: string) {
+  update(name: string)
+  {
     if (this.currentTag) {
-      this.$store.commit('updateTag', {id: this.currentTag.id, name});
+      const idList = this.$store.state.tagList.map((item: Tag) => item.id);
+      if (idList.indexOf(this.currentTag.id) >= 0) {
+        this.$store.state.tagList.map((item: Tag) => item.name);
+        const tag = this.$store.state.tagList.filter((item: Tag) => item.id === this.currentTag.id)[0];
+        tag.name = name;
+        this.$store.commit('saveTags');
+      }
     }
   }
+
 
   remove() {
     if (this.currentTag) {
@@ -50,7 +62,14 @@ export default class EditLabel extends Vue {
   }
 
   goBack() {
-    this.$router.back();
+    const names: string[] = (this.tagList.map((item: Tag) => item.name));
+    let index = names.indexOf(this.currentTag.name);
+    names.splice(index, 1);
+    if(names.indexOf(this.currentTag.name) >= 0){
+      window.alert('标签重复了');
+    }else {
+      this.$router.back();
+    }
   }
 }
 </script>
