@@ -1,7 +1,8 @@
 type RootState = {
-  recordList: RecordItem[],
-  tagList: Tag[],
-  currentTag?: Tag,
+  recordList: RecordItem[]
+  tagList: Tag[]
+  currentTag?: Tag
+  initialize: boolean | undefined
 }
 
 type RecordItem = {
@@ -13,8 +14,8 @@ type RecordItem = {
 }
 
 type Tag = {
-  id: string;
-  name: string;
+  id: string
+  name: string
 }
 
 type TagListModel = {
